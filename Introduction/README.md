@@ -109,7 +109,47 @@ const coffees = ["French Roast", "Colombian", "Kona"];
 const myList = ["home" /* empty */, , "school" /* empty */, ,];
 ```
 
-### Boolean Literals
+### Object Literals
+
+```javascript
+const sales = "Toyota";
+
+function carTypes(name) {
+  return name === "Honda" ? name : `Sorry, we don't sell ${name}.`;
+}
+
+const car = { myCar: "Saturn", getCar: carTypes("Honda"), special: sales };
+
+console.log(car.myCar); // Saturn
+console.log(car.getCar); // Honda
+console.log(car.special); // Toyota
+```
+
+```javascript
+const car = { manyCars: { a: "Saab", b: "Jeep" }, 7: "Mazda" };
+
+console.log(car.manyCars.b); // Jeep
+console.log(car[7]); // Mazda
+```
+
+### Enhanced Object Literals
+
+```javascript
+const obj = {
+  __proto__: theProtoObj,
+  handler,
+  toString() {
+    return "d" + super.toString();
+  },
+  ["prop_" + (() => 42)]: 42,
+};
+```
+
+### RegExp Literals
+
+```javascript
+const re = /ab+c/;
+```
 
 ## Conditionals
 
@@ -172,6 +212,46 @@ for (let x = 1; x <= 10; x++) {
 }
 ```
 
+## Do - While
+
+```javascript
+let i = 0;
+do {
+  i += 1;
+  console.log(i);
+} while (i < 5);
+```
+
+## Labled Statement
+
+A label provides a statement with an identifier that lets you refer to it elsewhere in your program.
+
+The Syntax
+
+label:
+statement
+
+In this example, the label markLoop identifies a while loop.
+
+```javascript
+markLoop: while (theMark) {
+  doSomething();
+}
+```
+
+## Try - Catch
+
+```javascript
+openMyFile();
+try {
+  writeMyFile(theData); // This may throw an error
+} catch (e) {
+  handleError(e); // If an error occurred, handle it
+} finally {
+  closeMyFile(); // Always close the resource
+}
+```
+
 ## Arrays
 
 ```javascript
@@ -179,6 +259,39 @@ const fruits = ["apple", "banana", "orange"];
 console.log(fruits);
 console.log(fruits[0]);
 console.log(fruits.length);
+```
+
+## For..of and For..in
+
+for...in iterates over property names
+for...of iterates over property values
+
+```javascript
+const arr = [3, 5, 7];
+arr.foo = "hello";
+
+for (const i in arr) {
+  console.log(i);
+}
+// "0" "1" "2" "foo"
+
+for (const i of arr) {
+  console.log(i);
+}
+// Logs: 3 5 7
+```
+
+The for...of and for...in statements can also be used with destructuring.
+For example, you can simultaneously loop over the keys and values of an object using Object.entries().
+
+```javascript
+const obj = { foo: 1, bar: 2 };
+
+for (const [key, val] of Object.entries(obj)) {
+  console.log(key, val);
+}
+// "foo" 1
+// "bar" 2
 ```
 
 ## Objects
@@ -190,6 +303,19 @@ like key value pairs
 const item = { name: "Chocoloate", price: 30 };
 console.log(item);
 console.log(item.price);
+```
+
+The following function takes as its argument an object and the object's name.
+
+```javascript
+function dumpProps(obj, objName) {
+  let result = "";
+  for (const i in obj) {
+    result += `${objName}.${i} = ${obj[i]}<br>`;
+  }
+  result += "<hr>";
+  return result;
+}
 ```
 
 ## Objects as array elements
